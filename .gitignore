@@ -2,4 +2,5 @@
 /vendor/
 /.phpunit.cache/
 .phpunit.result.cache
-composer.phar
+composer.pharComposer-Setup.exe
+Git-*.exe
