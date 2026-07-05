@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authentication Boundary Test</title>
+</head>
+<body>
+    <h2>UTF-8 Authentication-Key Boundary Test</h2>
+
+    <form method="post" action="auth.php">
+        <textarea id="authKey"
+                  name="auth_key"
+                  rows="8"
+                  cols="70"></textarea>
+
+        <p id="measurement">No test value generated.</p>
+
+        <button type="button" onclick="generateTest()">
+            Generate 200 multi-byte characters
+        </button>
+
+        <button type="submit">
+            Submit to vulnerable auth.php
+        </button>
+    </form>
+
+    <script>
+        function generateTest() {
+            const value = "é".repeat(200);
+
+            document.getElementById("authKey").value = value;
+
+            const characterLength = value.length;
+            const byteLength =
+                new TextEncoder().encode(value).length;
+
+            document.getElementById("measurement").textContent =
+                "Character count: " + characterLength +
+                " | UTF-8 byte count: " + byteLength;
+        }
+    </script>
+</body>
+</html>
